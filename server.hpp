@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Scheduler.h>
 #include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
 

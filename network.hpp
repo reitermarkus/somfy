@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Scheduler.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <EEPROM.h>
