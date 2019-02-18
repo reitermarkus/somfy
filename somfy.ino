@@ -41,6 +41,7 @@ void setup() {
 
   Serial.begin(115200);
   while (!Serial) {}
+  Serial.println();
 
   attachInterrupt(digitalPinToInterrupt(CH1_PIN), ch1_interrupt, CHANGE);
   attachInterrupt(digitalPinToInterrupt(CH2_PIN), ch2_interrupt, CHANGE);
