@@ -43,7 +43,7 @@ class NetworkTask: public Task {
 
       if (!wifiManager.autoConnect()) {
         Serial.println("Failed to connect and hit timeout, resetting ...");
-        ESP.reset();
+        ESP.restart();
         return;
       }
 
@@ -70,7 +70,7 @@ class NetworkTask: public Task {
         NetworkTask::shouldSaveConfig = false;
 
         if (!wifiManager.startConfigPortal()) {
-          ESP.reset();
+          ESP.restart();
           return;
         }
       }
@@ -81,7 +81,7 @@ class NetworkTask: public Task {
         Serial.printf("MDNS responder started with hostname “%s”.\n", custom_hostname);
       } else {
         Serial.println("Failed to start MDNS responder, resetting …");
-        ESP.reset();
+        ESP.restart();
         return;
       }
     }
