@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Scheduler.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <EEPROM.h>
+#include <Scheduler.h>
 #include <WiFiManager.h>
 
 class NetworkTask: public Task {
@@ -22,6 +22,10 @@ class NetworkTask: public Task {
   protected:
     void setup() {
       WiFiManager wifiManager;
+
+      #ifndef DEBUG
+        wifiManager.setDebugOutput(false);
+      #endif
 
       EEPROM.begin(sizeof(custom_hostname));
 
