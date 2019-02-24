@@ -3,6 +3,7 @@
 #include "helper.hpp"
 #include "interrupts.hpp"
 #include "network.hpp"
+#include "ota.hpp"
 #include "server.hpp"
 
 #ifdef ARDUINO_ESP8266_NODEMCU
@@ -21,6 +22,7 @@
 #endif
 
 NetworkTask network_task;
+OtaTask ota_task;
 ServerTask server_task;
 
 void setup() {
@@ -59,6 +61,7 @@ void setup() {
   Serial.printf("Channel %d detected.\n", current_channel);
 
   Scheduler.start(&network_task);
+  Scheduler.start(&ota_task);
   Scheduler.start(&server_task);
   Scheduler.begin();
 }
