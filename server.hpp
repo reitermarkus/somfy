@@ -15,7 +15,7 @@ class ServerTask: public Task {
 
   protected:
     void setup() {
-      Serial.println("Starting web server ...");
+      Serial.println("Starting web server…");
 
       server.on("/", HTTP_POST, [this]() {
         String json = server.arg("plain");
