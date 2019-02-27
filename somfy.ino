@@ -42,10 +42,9 @@ void setup() {
   digitalWrite(SWITCH_PIN, HIGH);
 
   Serial.begin(115200);
-  while (!Serial) {}
   Serial.println();
 
-  delay(1000);
+  delay(2000);
 
   channel();
 
