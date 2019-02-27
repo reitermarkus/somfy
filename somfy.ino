@@ -45,20 +45,13 @@ void setup() {
   while (!Serial) {}
   Serial.println();
 
-  attachInterrupt(digitalPinToInterrupt(CH1_PIN), ch1_interrupt, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(CH2_PIN), ch2_interrupt, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(CH3_PIN), ch3_interrupt, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(CH4_PIN), ch4_interrupt, CHANGE);
-
   delay(1000);
 
   channel();
 
-  Serial.println("Detecting channel…");
-
   delay(5000);
 
-  Serial.printf("Channel %d detected.\n", current_channel);
+  detect_channel();
 
   Scheduler.start(&network_task);
   Scheduler.start(&ota_task);

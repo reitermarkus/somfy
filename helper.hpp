@@ -1,5 +1,7 @@
 #pragma once
 
+#include "interrupts.hpp"
+
 extern const int CH1_PIN;
 extern const int CH2_PIN;
 extern const int CH3_PIN;
@@ -9,8 +11,6 @@ extern const int UP_PIN;
 extern const int STOP_PIN;
 extern const int DOWN_PIN;
 extern const int SWITCH_PIN;
-
-extern volatile int current_channel;
 
 unsigned long last_switch = 0;
 
@@ -28,6 +28,7 @@ bool switching() {
 }
 
 void up() {
+  disable_interrupts();
   digitalWrite(UP_PIN, LOW);
   delay(100);
   digitalWrite(UP_PIN, HIGH);
@@ -36,6 +37,7 @@ void up() {
 }
 
 void stop() {
+  disable_interrupts();
   digitalWrite(STOP_PIN, LOW);
   delay(100);
   digitalWrite(STOP_PIN, HIGH);
@@ -44,6 +46,7 @@ void stop() {
 }
 
 void down() {
+  disable_interrupts();
   digitalWrite(DOWN_PIN, LOW);
   delay(100);
   digitalWrite(DOWN_PIN, HIGH);
@@ -52,6 +55,7 @@ void down() {
 }
 
 void channel() {
+  enable_interrupts();
   digitalWrite(SWITCH_PIN, LOW);
   delay(100);
   digitalWrite(SWITCH_PIN, HIGH);
@@ -68,7 +72,7 @@ void next_channel() {
 }
 
 void switch_channel(int channel) {
-  int from = current_channel;
+  int from = detect_channel();
   int to = channel;
 
   if (from == to) {
@@ -80,6 +84,8 @@ void switch_channel(int channel) {
   for (int i = 0; i < diff; i++) {
     next_channel();
   }
+
+  delay(500);
 }
 
 void up(int channel) {
